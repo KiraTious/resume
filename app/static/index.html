@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>resume</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ушаков Никита Иванович</h1>
+        <p>Мужчина, 21 год, родился 20 февраля 2004</p>
+
+        <p>Проживает: Челябинск<br>
+           Гражданство: Россия, есть разрешение на работу: Россия</p>
+
+        <hr>
+
+        <h2>Желаемая должность</h2>
+        <strong>DevOps-инженер</strong><br>
+        Специализация: DevOps-инженер<br>
+        Занятость: полная<br>
+        График: полный день<br>
+        Время в пути: не имеет значения
+
+        <hr>
+
+        <h2>Образование</h2>
+        <p><strong>Неоконченное высшее</strong> (до 2026)<br>
+           Южно-Уральский государственный университет (НИУ), Челябинск<br>
+           Высшая школа электроники и компьютерных наук</p>
+
+        <hr>
+
+        <h2>Навыки</h2>
+        <p><strong>Языки:</strong> Русский — родной, Английский — B2<br>
+        <strong>Технологии:</strong> Linux, Docker, Python, Git, PostgreSQL, Wireshark, Bash, C</p>
+
+        <hr>
+
+        <h2>Обо мне</h2>
+        <p>Изучаю сети и обладаю базовыми знаниями о них, умею анализировать трафик с помощью tcpdump и Wireshark.
+        Увлекаюсь изучением Linux и Python. Хочу углубить знания в DevOps, изучить CI/CD.</p>
+
+        <hr>
+        <div class="button-container">
+            <button id="getPhone">Получить телефон</button>
+            <button id="getTelegram">Получить Telegram</button>
+        </div>
+        <p id="phone"></p>
+        <p id="tg"></p>
+    </div>
+
+
+
+    <script>
+        // Получение данных через API
+        document.getElementById("getPhone").addEventListener("click", function() {
+            fetch("/api/phone")
+                .then(response => response.json())
+                .then(data => document.getElementById("phone").textContent = data.phone);
+        });
+
+        document.getElementById("getTelegram").addEventListener("click", function() {
+            fetch("/api/telegram")
+                .then(response => response.json())
+                .then(data => document.getElementById("tg").textContent = data.tg);
+        });
+    </script>
+</body>
+</html>
