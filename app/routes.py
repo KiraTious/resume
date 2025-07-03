@@ -1,11 +1,16 @@
-from flask import Flask
-from flask import jsonify
-from app import create_app
+from flask import Blueprint, jsonify
+from .extensions import db
+from .models import Contact
 
-@app.route('api/phone')
+main = Blueprint('main', __name__)
+
+
+@main.route('/api/phone')
 def get_phone():
-    return 0
+    contact = Contact.query.get(1)
+    return jsonify({'phone' :contact.phone} if contact else 'not found')
 
-@app.route('api/telegram')
+@main.route('/api/telegram')
 def get_telegram():
-    return 0;
+    contact = Contact.query.get(1)
+    return jsonify({'telegram' : contact.telegram} if contact else 'not found')

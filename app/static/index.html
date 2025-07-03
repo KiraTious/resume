@@ -50,7 +50,7 @@
             <button id="getTelegram">Получить Telegram</button>
         </div>
         <p id="phone"></p>
-        <p id="tg"></p>
+        <p id="telegram"></p>
     </div>
 
 
@@ -65,7 +65,7 @@
         document.getElementById("getTelegram").addEventListener("click", function() {
             fetch("/api/telegram")
                 .then(response => response.json())
-                .then(data => document.getElementById("tg").textContent = data.tg);
+                .then(data => document.getElementById("telegram").textContent = data.telegram);
         });
     </script>
 </body>

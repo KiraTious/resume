@@ -1,7 +1,8 @@
 from .extensions import db
 
-class User (db.Model):
+class Contact (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    phone = db.Column(db.String(50), unique=True, nullable=False)
+    telegram = db.Column(db.String(50), unique=True, nullable=False)
 
 
