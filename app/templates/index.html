@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>resume</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
     <div class="container">
@@ -51,22 +51,49 @@
         </div>
         <p id="phone"></p>
         <p id="telegram"></p>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <p id="modal-text"></p>
+            </div>
+        </div>
     </div>
 
 
 
     <script>
-        document.getElementById("getPhone").addEventListener("click", function() {
-            fetch("/api/phone")
-                .then(response => response.json())
-                .then(data => document.getElementById("phone").textContent = data.phone);
-        });
+    const modal = document.getElementById("modal");
+    const modalText = document.getElementById("modal-text");
+    const closeBtn = document.querySelector(".close-btn");
 
-        document.getElementById("getTelegram").addEventListener("click", function() {
-            fetch("/api/telegram")
-                .then(response => response.json())
-                .then(data => document.getElementById("telegram").textContent = data.telegram);
-        });
+    document.getElementById("getPhone").addEventListener("click", function() {
+        fetch("/api/phone")
+            .then(response => response.json())
+            .then(data => {
+                modalText.textContent = "Телефон: " + data.phone;
+                modal.style.display = "block";
+            });
+    });
+
+    document.getElementById("getTelegram").addEventListener("click", function() {
+        fetch("/api/telegram")
+            .then(response => response.json())
+            .then(data => {
+                modalText.textContent = "Telegram: " + data.telegram;
+                modal.style.display = "block";
+            });
+    });
+
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
     </script>
+
 </body>
 </html>

@@ -1,9 +1,12 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, render_template
 from .extensions import db
 from .models import Contact
 
 main = Blueprint('main', __name__)
 
+@main.route('/')
+def home():
+    return render_template('index.html')
 
 @main.route('/api/phone')
 def get_phone():
