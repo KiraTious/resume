@@ -1,6 +1,6 @@
 from flask import Flask
 from .config import Config
-from .extensions import db
+from .extensions import db, mirage
 from .routes import main
 
 
@@ -9,6 +9,10 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     app.register_blueprint(main)
     db.init_app(app)
+
+    mirage.init_app(app, db)
+
+
     with app.app_context():
         db.create_all()
 
