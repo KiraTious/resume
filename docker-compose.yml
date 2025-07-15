@@ -1,0 +1,26 @@
+services:
+  backned:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: mybackend
+    ports:
+      - '5000:5000'
+    depends_on: mydb
+    networks:
+
+
+  mydb:
+    image: postgres:17.4
+    container_name: mydb
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '6000:5432'
+
+
+volumes:
+  pgdata:

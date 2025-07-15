@@ -1,0 +1,14 @@
+FROM python:3.13.3
+
+WORKDIR /usr/src/app
+
+COPY ./requirements.txt .
+COPY ./.env .
+COPY ./.flaskenv .
+COPY ./app ./app
+COPY ./run.py .
+COPY ./migrations .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["sleep", "100"]

@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:17.4
+    container_name: mydb
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      -  pgdata:/var/lib/postgresql/data
+    ports:
+      - '6000:5432'
+volumes:
+  pgdata:
