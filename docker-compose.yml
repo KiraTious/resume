@@ -6,9 +6,10 @@ services:
     container_name: mybackend
     ports:
       - '5000:5000'
-    depends_on: mydb
+    depends_on:
+      - mydb
     networks:
-
+      - db_flask_net
 
   mydb:
     image: postgres:17.4
@@ -16,11 +17,17 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST_AUTH_METHOD: trust
+    command: ["postgres", "-c", "listen_addresses=*"]
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - database_pgdata:/var/lib/postgresql/data
+    networks:
+      - db_flask_net
     ports:
-      - '6000:5432'
-
-
+      - '5433:5432'
 volumes:
-  pgdata:
+  database_pgdata:
+    external: true
+    name: database_pgdata
+networks:
+  db_flask_net:
+    driver: bridge
